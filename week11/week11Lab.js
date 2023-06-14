@@ -39,17 +39,15 @@
  * Step 3: In the "replaceTextInDiv" function, after replacing the text in the DIV make sure to clear out the input value.
  *
  * ↓ YOUR CODE HERE ↓ */
+let div = $('.put-here');
+let input = $('#input-value');
 
-let div = $('.put-here')
-let input = $('#input-value')
+function replaceTextInDiv(){
+  let newText = input.val();
 
-function replaceTextInDiv() {
-  let newText = input.val()
-  div.text(newText)
-  input.val('')
+  div.text(newText);
+  input.val("");
 }
-
-console.log($('#input-value').val())
 /*------------------------------------------------*/
 // Question 2: Before and After
 
@@ -59,10 +57,9 @@ console.log($('#input-value').val())
  * Step 3: When done, there should be three images on the screen: fish, dog, cat.
  *
  * ↓ YOUR CODE HERE ↓ */
+$('.dog').before("<div><img src='images/fish.png' width='200'></img></div>")
 
-$('.dog').before("<div><img src='images/fish.png' width='200'><div>")
-
-$('.dog').after("<div><img src='images/cat.png' width='200'><div>")
+$('.dog').after("<div><img src='images/cat.png' width='200'></div>")
 
 /*-------------------------------------------------*/
 // Question 3: Remove
@@ -73,8 +70,8 @@ $('.dog').after("<div><img src='images/cat.png' width='200'><div>")
  *
  *
  * ↓ YOUR CODE HERE ↓ */
+$("#lorem2").remove();
 
-$('#lorem2').remove()
 
 /*-------------------------------------------------*/
 // Question 4: AJAX with JQuery
@@ -103,12 +100,12 @@ $.get(CATS_API_URL, (data) => {
  *
  * ↓ YOUR CODE HERE ↓ */
 
-let JOKES_API_URL = 'https://official-joke-api.appspot.com/random_joke'
+const JOKES_API_URL = 'https://official-joke-api.appspot.com/random_joke';
 
 $.get(JOKES_API_URL, (data) => {
-  console.log(data)
-  $('.jokes').prepend(`<p> ${data.setup} </p>`)
-  $('.jokes').append(`<p> ${data.punchline} </p>`)
+  console.log(data);
+  $('.jokes').prepend(`<p>${data.setup}</p>`);
+  $('.jokes').append(`<p>${data.punchline}`);
 })
 
 /*--------------------------------------------------*/
@@ -136,20 +133,25 @@ $.get(JOKES_API_URL, (data) => {
 	*
 	* ↓ YOUR CODE HERE ↓ */
 
-$.get('http://localhost:3000/gradebook', (data) => console.log(data))
 
-$.get('http://localhost:3000/gradebook/7', (data) => {
-  console.log(data)
-  $('.result').text(
-    data.firstname + ' ' + data.lastname + ', Grade: ' + data.grade + '%'
-  )
+$.get('http://localhost:3000/gradebook/7',  (data) =>{
+ console.log(data);
+ $('.result').text(data.firstname + " " + data.lastname + ", Grade: " + data.grade + "%");
+
 })
-$.get('http://localhost:3000/gradebook/12', (data) => {
-  console.log(data)
-  $('.new').text(
-    data.firstname + ' ' + data.lastname + ', Grade: ' + data.grade + '%'
-  )
+
+$.get('http://localhost:3000/gradebook/12', (data)=> {
+  console.log(data);
+ 
+ $('.new').text(data.firstname + " " + data.lastname + ", Grade: " + data.grade + " % ");
 })
+
+
+
+
+
+
+
 
 /*--------------------------------------------------*/
 // Question 6: POST
@@ -175,5 +177,23 @@ $('.test').on('click', function () {
  *
  *
  * ↓ YOUR CODE HERE ↓ */
+
+$('.postBtn').on('click', function() {
+  let first = $('#firstname').value();
+  let last = $('#lastname').value();
+  let grade = $('#grade').value();
+
+
+   const API = 'http://localhost:3000/gradebook';
+  $.post(API, 
+    {
+      "firstname": first,
+      "lastname" : last,
+      "grade" : grade
+    });
+})
+
+
+
 
 /*--------------------------------------------------*/
